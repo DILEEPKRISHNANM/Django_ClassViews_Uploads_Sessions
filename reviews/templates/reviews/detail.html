@@ -1,0 +1,25 @@
+{%extends "reviews/base.html"%}
+ 
+
+  {%block title %}Detail{%endblock%}
+  {%block content %}
+        {% comment %} we can also modelname in small case instead of object {% endcomment %}
+          <ul>
+            <li>{{object.user_name}}</li>
+            <li>{{object.rating}}</li>
+            <li>{{object.review_text}}</li>
+
+            {% if is_favourite %}
+                <p>This Is My Favourite</p>
+            {%else%}
+              <form action="/listing/favourites" method="POST">
+                {% csrf_token %}
+                  <input type="hidden" name="review_id" value="{{object.id}}">
+                  <button>Favourite</button>
+              </form>
+              
+            {%endif%}
+          </ul>
+
+
+  {%endblock%}
